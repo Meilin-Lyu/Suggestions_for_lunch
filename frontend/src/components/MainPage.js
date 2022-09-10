@@ -17,9 +17,9 @@ class MainPage extends React.Component {
         category: [new Set()],
     }
     template = new Promise((resolve, reject) => {
-        axios.get('http://127.0.0.1:8000/api/suggestions')
+        axios.get('http://127.0.0.1:8000/api/suggestion/')
             .then((res) => {
-                console.log(res)
+                console.log(res);
                 resolve(res);
             })
             .catch((err) => {
@@ -27,11 +27,11 @@ class MainPage extends React.Component {
                 reject(err);
             })
     });
-    
+
     likePost = (id) => {
         const { posts } = this.state;
         const post = posts.find(post => post.id === id);
-        if(post.isLiked) {
+        if (post.isLiked) {
             post.like -= 1;
             post.isLiked = false;
         } else {
