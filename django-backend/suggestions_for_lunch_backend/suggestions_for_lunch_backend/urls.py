@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
-router.register(r'suggestions', views.SuggestionView, 'suggestion')
+router.register(r'suggestion', views.SuggestionView, 'suggestion')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
