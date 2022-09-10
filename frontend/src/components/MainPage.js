@@ -2,6 +2,7 @@ import React from 'react';
 import '../css/MainPage.css';
 import Category from './Category';
 import PostList from './PostList';
+import axios from 'axios';
 class MainPage extends React.Component {
     state = {
         posts:
@@ -15,13 +16,17 @@ class MainPage extends React.Component {
             ],
         category: [new Set()],
     }
-    // tmp = new Promise((resolve, reject) => {
-    //     axios.get('http://localhost:8080/api/suggestions')
-    //         .then((res) => {
-    //             console.log(res)
-    //             resolve(res);
-    //         })
-    // });
+    template = new Promise((resolve, reject) => {
+        axios.get('http://127.0.0.1:8000/api/suggestions')
+            .then((res) => {
+                console.log(res)
+                resolve(res);
+            })
+            .catch((err) => {
+                console.log(err)
+                reject(err);
+            })
+    });
     
     likePost = (id) => {
         const { posts } = this.state;
