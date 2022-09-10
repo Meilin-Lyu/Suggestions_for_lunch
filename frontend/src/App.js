@@ -1,10 +1,8 @@
-import Button from 'react-bootstrap/Button';
-import './App.css';
+import MainPage from "./components/MainPage";
 function App() {
   return (
     <div className="App">
-      <h2>App</h2>
-      <Button variant="outline-success">button from bootstrap</Button>
+      <MainPage />
     </div>
   );
 }
