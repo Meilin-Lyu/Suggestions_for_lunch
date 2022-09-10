@@ -4,11 +4,13 @@ from django.db import models
 import os
 
 from django.conf import settings
+import uuid
 
 MEDIA_ROOT = os.path.join(settings.BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
 class suggestion(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=120)
     image = models.ImageField(upload_to='images/')
     description = models.CharField(max_length=400)
