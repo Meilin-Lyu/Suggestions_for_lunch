@@ -1,3 +1,5 @@
+from datetime import datetime
+from django.utils import timezone
 from django.db import models
 import os
 
@@ -11,7 +13,7 @@ class suggestion(models.Model):
     image = models.ImageField(upload_to='images/')
     description = models.CharField(max_length=400)
     location = models.CharField(max_length=120)
-    time = models.DateTimeField(auto_now_add=True)
+    time = models.DateTimeField(default=timezone.now)
     #categories
     western = models.BooleanField(default=False)
     asian = models.BooleanField(default=False)
