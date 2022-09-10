@@ -5,7 +5,7 @@ class SuggestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = suggestion
         fields = ('title', 'image', 'description', 'location', 'western', 'asian', 'indian')
-        read_only_fields = ('id', 'time',)
+        read_only_fields = ('time',)
         extra_kwargs = {
             'title': {'required': True},
             'image': {'required': True},
