@@ -15,7 +15,7 @@ class suggestion(models.Model):
     image = models.ImageField(upload_to='images/')
     description = models.CharField(max_length=400)
     location = models.CharField(max_length=120)
-    time = models.DateTimeField(default=timezone.now)
+    posttime = models.DateTimeField(default=timezone.now, editable=False)
     #categories
     western = models.BooleanField(default=False)
     asian = models.BooleanField(default=False)

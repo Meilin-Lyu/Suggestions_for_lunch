@@ -4,8 +4,7 @@ from .models import suggestion
 class SuggestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = suggestion
-        fields = ('title', 'image', 'description', 'location', 'western', 'asian', 'indian')
-        read_only_fields = ('time',)
+        fields = ('id', 'title', 'image', 'description', 'location', 'posttime', 'western', 'asian', 'indian')
         extra_kwargs = {
             'title': {'required': True},
             'image': {'required': True},
