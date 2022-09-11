@@ -5,6 +5,7 @@ import PostList from './PostList';
 import CreatePost from './NewSuggestionForm';
 import axios from 'axios';
 import NewSuggestionModal from './NewSuggestionModal';
+import RandomModal from './RandomModal';
 
 
 const api = axios.create({
@@ -49,6 +50,7 @@ class MainPage extends React.Component {
                 <Category categoryChange={this.categoryChange} />
                 <PostList posts={this.state.posts} category={this.state.category} likePost={this.likePost} />
                 <NewSuggestionModal create={true} resetState={this.resetState}  />
+                <RandomModal create={true} resetState={this.resetState}  />
             </div>
             
         )
