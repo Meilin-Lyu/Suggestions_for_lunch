@@ -13,7 +13,7 @@ const Category = (props) => {
     }
     return (
         <div className="Category">
-            <ToggleButtonGroup type="checkbox" value={value} onChange={handleChange}>
+            <ToggleButtonGroup type="checkbox" value={value} onChange={handleChange} defaultValue={['western', 'asian', 'indian']}>
                 {categoryName.map((name, id) => (
                     <ToggleButton
                         key={id}
