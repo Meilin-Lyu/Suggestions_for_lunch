@@ -10,29 +10,47 @@ class NewSuggestionForm extends React.Component {
     title: "",
     description: "",
     location: "",
-    time:"",
     western:false,
     asian:false,
-    indian:false
+    indian:false,
+    image: null,
   };
 
   componentDidMount() {
     if (this.props.suggestion) {
-      const { title,description, location,time,western,asian,indian } = this.props.suggestion;
-      this.setState({ title,description, location,time,western,asian,indian });
+      const { title,description, location, image,western,asian,indian } = this.props.suggestion;
+      this.setState({ title,description, location, image,western,asian,indian });
     }
   };
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.id]: e.target.value });
   };
+
+  onImgChange = e => {
+    this.setState({ image: e.target.files[0]});
+  }
 
   handleClose = () => this.setShow(false);
   
  
   createSuggestion = e => {
     e.preventDefault();
-    axios.post(API_URL, this.state).then(() => {
+    console.log(this.state);
+    let formData = new FormData();
+    formData.append("title", this.state.title);
+    formData.append("image", this.state.image, this.state.image.name);
+    formData.append("description", this.state.description);
+    formData.append("location", this.state.location);
+    formData.append("western", this.state.western);
+    formData.append("asian", this.state.asian);
+    formData.append("indian", this.state.indian);
+    console.log("finished formdata")
+    axios.post(API_URL, formData, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      }
+    }).then(() => {
       this.props.resetState();
       this.props.toggle();
       this.handleClose();
@@ -51,19 +69,17 @@ class NewSuggestionForm extends React.Component {
           <Label for="title">Title:</Label>
           <Input
             type="text"
-            name="title"
+            id="title"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.title)}
           />
         </FormGroup>
-
         <FormGroup>
           <Label for="image">Image:</Label>
           <Input
             type="file"
-            name="image"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.image)}
+            id="image"
+            onChange={(e) => this.onImgChange(e)}
           />
         </FormGroup>
 
@@ -71,7 +87,7 @@ class NewSuggestionForm extends React.Component {
           <Label for="description">Description:</Label>
           <Input
             type="text"
-            name="description"
+            id="description"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.description)}
           />
@@ -82,25 +98,16 @@ class NewSuggestionForm extends React.Component {
           <Label for="location">Location:</Label>
           <Input
             type="text"
-            name="location"
+            id="location"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.location)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="time">Time:</Label>
-          <Input
-            type="date"
-            name="time"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.time)}
           />
         </FormGroup>
         <FormGroup>
           <Label for="western">Western:</Label>
           <Input
             type="checkbox"
-            name="western"
+            id="western"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.western)}
           />
@@ -109,7 +116,7 @@ class NewSuggestionForm extends React.Component {
           <Label for="asian">Asian:</Label>
           <Input
             type="checkbox"
-            name="asian"
+            id="asian"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.asian)}
           />
@@ -118,15 +125,12 @@ class NewSuggestionForm extends React.Component {
           <Label for="indian">Indian:</Label>
           <Input
             type="checkbox"
-            name="indian"
+            id="indian"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.indian)}
           />
-        </FormGroup>
-
-
-        
-        <Button>Send</Button>
+        </FormGroup>  
+        <Input type='submit' />
       </Form>
     );
   }
