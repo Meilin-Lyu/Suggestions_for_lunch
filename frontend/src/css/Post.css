@@ -6,6 +6,11 @@
 }
 
 .postImage {
+    /* width: 1000px; */
     height: 300px;
     width: 300px;
+    /* height: auto; */
+    background-color: red;
+    /* margin: 10px; */
+    /* padding: 10px; */
 }

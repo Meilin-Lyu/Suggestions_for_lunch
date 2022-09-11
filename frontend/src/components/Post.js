@@ -33,7 +33,8 @@ const Post = (props) => {
     return (
         <div className="post">
             {isShow(props.category, postCategory) ? (
-                <Card border="success" className="postCard" style={{ width: '20rem' }}>
+                <Card border="primary" className="postCard" style={{ width: '20rem' }}>
+                    {/* <Card>.Img className="postImage" variant="top" src={require("../images/google-img.png")} /> */}
                     <Card.Img className="postImage" variant="top" src={imageurl} />
                     <Card.Body style={{ height: "12rem"}}>
                         <Card.Title>{title}</Card.Title>
@@ -42,7 +43,7 @@ const Post = (props) => {
                         </Card.Text>
                         <Button 
                             style={{ position: "absolute", bottom: "1rem" }}
-                            variant="outline-success"
+                            variant="outline-primary"
                             onClick={() => props.likePost(id)}>
                             Like it <Badge bg="secondary">{like}</Badge>
                         </Button>

@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import Button from 'react-bootstrap/Button';
+import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import NewSuggestionForm from "./NewSuggestionForm";
-import "../css/NewSuggestionModal.css";
 
 class NewSuggestionModal extends Component {
   state = {
@@ -25,11 +23,12 @@ class NewSuggestionModal extends Component {
 
       button = (
         <Button
-          variant="outline-success"
-          className= "addBtn"
+          color="primary"
+          className="float-right"
           onClick={this.toggle}
+          style={{ minWidth: "200px" }}
         >
-          Add Post
+          Create New
         </Button>
       );
     }
