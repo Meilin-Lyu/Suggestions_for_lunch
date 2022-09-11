@@ -34,10 +34,23 @@ class NewSuggestionForm extends React.Component {
   createSuggestion = e => {
     e.preventDefault();
     console.log(this.state);
-    axios.post(API_URL, this.state).then(() => {
+    let formData = new FormData();
+    formData.append("title", this.state.title);
+    formData.append("image", this.state.image, this.state.image.name);
+    formData.append("description", this.state.description);
+    formData.append("location", this.state.location);
+    formData.append("western", this.state.western);
+    formData.append("asian", this.state.asian);
+    formData.append("indian", this.state.indian);
+    console.log("finished formdata");
+    axios.post(API_URL, formData, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      }
+    }).then(() => {
+     
       this.props.toggle();
-      // this.handleClose();
-      console.log("done")
+      
     });
   };
   
