@@ -15,7 +15,7 @@ const api = axios.create({
 class MainPage extends React.Component {
     state = {
         posts: [],
-        category: [],
+        category: ['western', 'asian', 'indian'],
     }
 
     constructor(){
@@ -33,6 +33,12 @@ class MainPage extends React.Component {
     likePost = (id) => {
         const { posts } = this.state;
         const post = posts.find(post => post.id === id);
+        if(!post.liked){
+            post.liked = false;
+        }
+        if(!post.like){
+            post.like = 0;
+        }
         if (post.isLiked) {
             post.like -= 1;
             post.isLiked = false;
