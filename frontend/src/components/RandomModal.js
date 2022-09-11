@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import Button from 'react-bootstrap/Button';
 import RandomResult from "./RandomResult";
+import "../css/RandomModal.css";
 
 class RandomModal extends Component {
   state = {
@@ -21,8 +23,8 @@ class RandomModal extends Component {
     if (create) {
       button = (
         <Button
-          color="primary"
-          className="float-right"
+          variant="outline-success"
+          className="randombtn"
           onClick={this.toggle}
           style={{ minWidth: "300px" }}
         >

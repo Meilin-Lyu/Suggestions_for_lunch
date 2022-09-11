@@ -161,6 +161,7 @@ class RandomResult extends React.Component {
          
           <img
             src={this.state.image}
+            width = "450"
           />
         </FormGroup>
       </Form>
