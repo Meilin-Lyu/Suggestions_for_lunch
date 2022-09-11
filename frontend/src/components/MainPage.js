@@ -5,28 +5,20 @@ import PostList from './PostList';
 import axios from 'axios';
 class MainPage extends React.Component {
     state = {
-        posts:
-            [
-                { id: 1, category: "Chinese food", content: "foodA", like: 0, isLiked: false },
-                { id: 2, category: "Japanese food", content: "foodB", like: 0, isLiked: false },
-                { id: 3, category: "Korean food", content: "foodC", like: 0, isLiked: false },
-                { id: 4, category: "Chinese food", content: "foodD", like: 0, isLiked: false },
-                { id: 5, category: "Japanese food", content: "foodE", like: 0, isLiked: false },
-                { id: 6, category: "Korean food", content: "foodF", like: 0, isLiked: false },
-            ],
-        category: [new Set()],
+        posts: [],
+        category: [],
     }
-    template = new Promise((resolve, reject) => {
+
+    categoryChange = (id) => {
+        this.setState({ category: id });
+    }
+
+    componentDidMount() {
         axios.get('http://127.0.0.1:8000/api/suggestion/')
             .then((res) => {
-                console.log(res);
-                resolve(res);
+                this.setState({ posts: res.data });
             })
-            .catch((err) => {
-                console.log(err)
-                reject(err);
-            })
-    });
+    }
 
     likePost = (id) => {
         const { posts } = this.state;
@@ -40,16 +32,13 @@ class MainPage extends React.Component {
         }
         this.setState({ posts });
     };
-    // onCategoryChange = (category) => {
-    //     if()
-    // }
 
     render() {
         return (
             <div className="MainPage" >
                 <h1 className="title">Suggestions for Lunch</h1>
-                <Category />
-                <PostList posts={this.state.posts} likePost={this.likePost} />
+                <Category categoryChange={this.categoryChange} />
+                <PostList posts={this.state.posts} category={this.state.category} likePost={this.likePost} />
             </div>
         )
     }
