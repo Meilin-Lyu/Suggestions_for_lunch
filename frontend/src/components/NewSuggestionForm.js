@@ -9,25 +9,33 @@ class NewSuggestionForm extends React.Component {
   state = {
     title: "",
     description: "",
-    location: ""
+    location: "",
+    time:"",
+    western:false,
+    asian:false,
+    indian:false
   };
 
   componentDidMount() {
     if (this.props.suggestion) {
-      const { title, description, location } = this.props.suggestion;
-      this.setState({ title, description, location });
+      const { title,description, location,time,western,asian,indian } = this.props.suggestion;
+      this.setState({ title,description, location,time,western,asian,indian });
     }
-  }å
+  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  handleClose = () => this.setShow(false);
+  
  
   createSuggestion = e => {
     e.preventDefault();
     axios.post(API_URL, this.state).then(() => {
       this.props.resetState();
       this.props.toggle();
+      this.handleClose();
     });
   };
   
@@ -68,7 +76,7 @@ class NewSuggestionForm extends React.Component {
             value={this.defaultIfEmpty(this.state.description)}
           />
         </FormGroup>
-
+        
        
         <FormGroup>
           <Label for="location">Location:</Label>
@@ -79,7 +87,6 @@ class NewSuggestionForm extends React.Component {
             value={this.defaultIfEmpty(this.state.location)}
           />
         </FormGroup>
-
         <FormGroup>
           <Label for="time">Time:</Label>
           <Input
@@ -89,8 +96,6 @@ class NewSuggestionForm extends React.Component {
             value={this.defaultIfEmpty(this.state.time)}
           />
         </FormGroup>
-        
-        
         <FormGroup>
           <Label for="western">Western:</Label>
           <Input
@@ -118,6 +123,9 @@ class NewSuggestionForm extends React.Component {
             value={this.defaultIfEmpty(this.state.indian)}
           />
         </FormGroup>
+
+
+        
         <Button>Send</Button>
       </Form>
     );

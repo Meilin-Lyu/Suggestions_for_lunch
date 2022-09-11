@@ -49,7 +49,7 @@ class MainPage extends React.Component {
                 <h1 className="title">Suggestions for Lunch</h1>
                 <Category />
                 <PostList posts={this.state.posts} likePost={this.likePost} />
-                <NewSuggestionModal />
+                <NewSuggestionModal create={true} resetState={this.resetState}  />
             </div>
             
         )
