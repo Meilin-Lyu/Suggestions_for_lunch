@@ -24,11 +24,16 @@ class NewSuggestionForm extends React.Component {
   };
 
   onChange = e => {
-    this.setState({ [e.target.id]: e.target.value });
+    console.log(e.target.value, e.target.name);
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   onImgChange = e => {
     this.setState({ image: e.target.files[0]});
+  }
+
+  onCheckboxChange = e => {
+    this.setState({ [e.target.name]: e.target.checked });
   }
 
   handleClose = () => this.setShow(false);
@@ -45,15 +50,15 @@ class NewSuggestionForm extends React.Component {
     formData.append("western", this.state.western);
     formData.append("asian", this.state.asian);
     formData.append("indian", this.state.indian);
-    console.log("finished formdata")
+    console.log("finished formdata");
     axios.post(API_URL, formData, {
       headers: {
         'content-type': 'multipart/form-data',
       }
     }).then(() => {
-      this.props.resetState();
+     
       this.props.toggle();
-      this.handleClose();
+      
     });
   };
   
@@ -69,7 +74,7 @@ class NewSuggestionForm extends React.Component {
           <Label for="title">Title:</Label>
           <Input
             type="text"
-            id="title"
+            name="title"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.title)}
           />
@@ -78,7 +83,7 @@ class NewSuggestionForm extends React.Component {
           <Label for="image">Image:</Label>
           <Input
             type="file"
-            id="image"
+            name="image"
             onChange={(e) => this.onImgChange(e)}
           />
         </FormGroup>
@@ -87,18 +92,16 @@ class NewSuggestionForm extends React.Component {
           <Label for="description">Description:</Label>
           <Input
             type="text"
-            id="description"
+            name="description"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.description)}
           />
         </FormGroup>
-        
-       
         <FormGroup>
           <Label for="location">Location:</Label>
           <Input
             type="text"
-            id="location"
+            name="location"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.location)}
           />
@@ -107,8 +110,8 @@ class NewSuggestionForm extends React.Component {
           <Label for="western">Western:</Label>
           <Input
             type="checkbox"
-            id="western"
-            onChange={this.onChange}
+            name="western"
+            onChange={this.onCheckboxChange}
             value={this.defaultIfEmpty(this.state.western)}
           />
         </FormGroup>
@@ -116,8 +119,8 @@ class NewSuggestionForm extends React.Component {
           <Label for="asian">Asian:</Label>
           <Input
             type="checkbox"
-            id="asian"
-            onChange={this.onChange}
+            name="asian"
+            onChange={this.onCheckboxChange}
             value={this.defaultIfEmpty(this.state.asian)}
           />
         </FormGroup>
@@ -125,8 +128,8 @@ class NewSuggestionForm extends React.Component {
           <Label for="indian">Indian:</Label>
           <Input
             type="checkbox"
-            id="indian"
-            onChange={this.onChange}
+            name="indian"
+            onChange={this.onCheckboxChange}
             value={this.defaultIfEmpty(this.state.indian)}
           />
         </FormGroup>  
