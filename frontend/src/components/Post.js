@@ -34,7 +34,6 @@ const Post = (props) => {
         <div className="post">
             {isShow(props.category, postCategory) ? (
                 <Card border="success" className="postCard" style={{ width: '20rem' }}>
-                    {/* <Card>.Img className="postImage" variant="top" src={require("../images/google-img.png")} /> */}
                     <Card.Img className="postImage" variant="top" src={imageurl} />
                     <Card.Body style={{ height: "12rem"}}>
                         <Card.Title>{title}</Card.Title>
