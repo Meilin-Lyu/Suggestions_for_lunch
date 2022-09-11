@@ -7,16 +7,24 @@ import "../css/Post.css";
 
 
 const Post = (props) => {
-    const { id, category, content, like } = props.post;
+    //const { id, category, content, like } = props.post;
+    const { id, title, image, description, location, posttime, like, western, asian, indian } = props.post;
 
     return (
         <Card border="primary" className="postCard" style={{ width: '20rem' }}>
             {/* <Card>.Img className="postImage" variant="top" src={require("../images/google-img.png")} /> */}
-            <Card.Img className="postImage" variant="top" src={require("../images/google-img.png")} />
+             <Card.Img className="postImage" variant="top" src={image} />
+  
             <Card.Body>
-                <Card.Title>{category}</Card.Title>
+                <Card.Title>{title}</Card.Title>
                 <Card.Text>
-                    {content}
+                    {description}
+                </Card.Text>
+                <Card.Text>
+                    {location}
+                </Card.Text>
+                <Card.Text>
+                    Posted on: {Date(posttime)}
                 </Card.Text>
                 <Button
                     variant="outline-primary"
