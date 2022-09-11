@@ -13,7 +13,8 @@ const api = axios.create({
 
 class MainPage extends React.Component {
     state = {
-        posts: []
+        posts: [],
+        category: [],
     }
 
     constructor(){
@@ -24,28 +25,9 @@ class MainPage extends React.Component {
         })
     }
 
-    /*
-    state = {
-        posts:
-            [
-                { id: 1, category: "Chinese food", content: "foodA", like: 0, isLiked: false },
-                
-            ],
-        category: [new Set()]
+    categoryChange = (id) => {
+        this.setState({ category: id });
     }
-    */
-
-    template = new Promise((resolve, reject) => {
-        axios.get('http://127.0.0.1:8000/api/suggestion/')
-            .then((res) => {
-                console.log(res);
-                resolve(res);
-            })
-            .catch((err) => {
-                console.log(err)
-                reject(err);
-            })
-    });
 
     likePost = (id) => {
         const { posts } = this.state;
@@ -59,16 +41,13 @@ class MainPage extends React.Component {
         }
         this.setState({ posts });
     };
-    // onCategoryChange = (category) => {
-    //     if()
-    // }
     
     render() {
         return (
             <div className="MainPage" >
                 <h1 className="title">Suggestions for Lunch</h1>
-                <Category />
-                <PostList posts={this.state.posts} likePost={this.likePost} />
+                <Category categoryChange={this.categoryChange} />
+                <PostList posts={this.state.posts} category={this.state.category} likePost={this.likePost} />
                 <NewSuggestionModal create={true} resetState={this.resetState}  />
             </div>
             
