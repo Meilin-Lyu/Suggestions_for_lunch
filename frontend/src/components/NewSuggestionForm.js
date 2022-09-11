@@ -10,25 +10,33 @@ class NewSuggestionForm extends React.Component {
     title: "",
     description: "",
     location: "",
-    time:"",
     western:false,
     asian:false,
-    indian:false
+    indian:false,
+    image: null,
   };
 
   componentDidMount() {
     if (this.props.suggestion) {
-      const { title,description, location,time,western,asian,indian } = this.props.suggestion;
-      this.setState({ title,description, location,time,western,asian,indian });
+      const { title,description, location, image,western,asian,indian } = this.props.suggestion;
+      this.setState({ title,description, location, image,western,asian,indian });
     }
   };
 
   onChange = e => {
-    console.log()
+    console.log(e.target.value, e.target.name);
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  // handleClose = () => this.setShow(false);
+  onImgChange = e => {
+    this.setState({ image: e.target.files[0]});
+  }
+
+  onCheckboxChange = e => {
+    this.setState({ [e.target.name]: e.target.checked });
+  }
+
+  handleClose = () => this.setShow(false);
   
  
   createSuggestion = e => {
@@ -71,14 +79,12 @@ class NewSuggestionForm extends React.Component {
             value={this.defaultIfEmpty(this.state.title)}
           />
         </FormGroup>
-
         <FormGroup>
           <Label for="image">Image:</Label>
           <Input
             type="file"
             name="image"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.image)}
+            onChange={(e) => this.onImgChange(e)}
           />
         </FormGroup>
 
@@ -91,8 +97,6 @@ class NewSuggestionForm extends React.Component {
             value={this.defaultIfEmpty(this.state.description)}
           />
         </FormGroup>
-        
-       
         <FormGroup>
           <Label for="location">Location:</Label>
           <Input
@@ -103,20 +107,11 @@ class NewSuggestionForm extends React.Component {
           />
         </FormGroup>
         <FormGroup>
-          <Label for="time">Time:</Label>
-          <Input
-            type="date"
-            name="time"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.time)}
-          />
-        </FormGroup>
-        <FormGroup>
           <Label for="western">Western:</Label>
           <Input
             type="checkbox"
             name="western"
-            onChange={this.onChange}
+            onChange={this.onCheckboxChange}
             value={this.defaultIfEmpty(this.state.western)}
           />
         </FormGroup>
@@ -125,7 +120,7 @@ class NewSuggestionForm extends React.Component {
           <Input
             type="checkbox"
             name="asian"
-            onChange={this.onChange}
+            onChange={this.onCheckboxChange}
             value={this.defaultIfEmpty(this.state.asian)}
           />
         </FormGroup>
@@ -134,11 +129,11 @@ class NewSuggestionForm extends React.Component {
           <Input
             type="checkbox"
             name="indian"
-            onChange={this.onChange}
+            onChange={this.onCheckboxChange}
             value={this.defaultIfEmpty(this.state.indian)}
           />
-        </FormGroup>
-        <Button>Send</Button>
+        </FormGroup>  
+        <Input type='submit' />
       </Form>
     );
   }
